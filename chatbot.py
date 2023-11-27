@@ -12,15 +12,13 @@ client = OpenAI(
     api_key=api_key,
 )
 
-user_content = input("Ask me any question:  ")
+
 def gpt_output(user_content):
-
-    
-
+    user_content = input("Ask me any question:  ")
     conversation = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": user_content}
-        # Add more user and assistant messages as needed
+        
     ]
 
     response = client.chat.completions.create(
@@ -34,8 +32,8 @@ def gpt_output(user_content):
    
 )
  
-    
-    print(response.choices[0].message.content)
+    print("AI Response:  ", response.choices[0].message.content)
+gpt_output(user_content="")
 
-
-gpt_output(user_content)
+while True:
+    gpt_output(user_content=None)

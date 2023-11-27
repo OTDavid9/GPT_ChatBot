@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT-3.5 Turbo Chat Interface</title>
+</head>
+<body>
+    <h1>GPT-3.5 Turbo Chat Interface</h1>
+    
+    <label for="user_input">Ask me any question:</label>
+    <input type="text" id="user_input" name="user_input" style="width: 300px;">
+    
+    <button onclick="getResponse()">Get Response</button>
+    
+    <p id="ai_response"></p>
+
+    <script>
+        function getResponse() {
+            var userContent = document.getElementById("user_input").value;
+
+            fetch("/get_response", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: "user_content=" + encodeURIComponent(userContent),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ai_response").innerText = "AI Response: " + data.ai_response;
+            });
+        }
+    </script>
+</body>
+</html>
